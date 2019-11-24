@@ -44,12 +44,12 @@
         Please input your house information:
     </div>
 
-    <form action="/" method="POST">
+    <form action="ui1.html" method="POST">
 
     <div style="flex-direction: row;display: flex;">
         <div><span>Rooms:</span>
             <input placeholder="1 - 16" class="input_style" name="room"
-{#                   pattern="\d{2}" oninvalid="setCustomValidity('have to 1 - 16');"#}
+                   type="text" id="room" class="room"
                    οninput="setCustomValidity('');" />
 
         </div>
@@ -705,10 +705,10 @@
             <span>Regionname:</span>
             <select  type="text" id="regionname" name="regionname">
                 <option value ="" style='display: none'></option>
-                <option value="Western Victoria">Western Victoria</option>
-                <option value="Southern Metropolitan">Southern Metropolitan</option>
-                <option value="Northern Metropolitan">Northern Metropolitan</option>
-                <option value="Eastern Metropolitan">Eastern Metropolitan</option>
+                <option value="WESTERN Victoria">Western Victoria</option>
+                <option value="SOUTHERN Metropolitan">Southern Metropolitan</option>
+                <option value="NORTHERN Metropolitan">Northern Metropolitan</option>
+                <option value="EASTERN Metropolitan">Eastern Metropolitan</option>
             </select>
         </div>
         <div>
@@ -739,8 +739,8 @@
 
 <!--    <div>-->
 <!--        <div>-->
-        <input type="submit" value="Submit" />
-           <a href="#" style="text-decoration: none; display: block; width: 270px;height: 50px;background-color: #4472C4;color: white;font-size: 1.2rem;margin-top: 30px;margin-left: auto;margin-right: auto;line-height: 50px; " id="startPredicting" onclick=javascrtpt:jump()-->
+        <input type="submit" style="text-decoration: none; display: block; width: 270px;height: 50px;background-color: #4472C4;color: white;font-size: 1.2rem;margin-top: 30px;margin-left: auto;margin-right: auto;line-height: 50px; " value="Submit" onclick="test();"/>
+ <!--          <a href="#" style="text-decoration: none; display: block; width: 270px;height: 50px;background-color: #4472C4;color: white;font-size: 1.2rem;margin-top: 30px;margin-left: auto;margin-right: auto;line-height: 50px; " id="startPredicting" onclick=javascrtpt:jump()-->
 <!--               style="text-decoration: none; display: block; width: 270px;height: 50px;background-color: #4472C4;color: white;font-size: 1.2rem;margin-top: 30px;margin-left: auto;margin-right: auto;line-height: 50px; ">-->
 <!--                Start predicting-->
 <!--            </a>-->
@@ -755,51 +755,123 @@
 
 <script>
 
-    function jump(){
+    function test()
+    {
+        var v=document.getElementById("room").value;
 
-        window.location.href="ui2.html";
+        if (isNaN(v)) {
+            alert('Room need number');
+            return;
+        }
+        var i=parseInt(v);
+        if(v<1 || v>16) {
+			if(v!="")
+            alert('Room need 1 - 16！');
+            return;
+        }
+        if(v%1 !== 0){
+            alert('Distance need integer');
+            return;
+        }
 
-        // let value = 0;
-        // let rooms_num = $("#room").val();
-        // let type_num = $("#type").val();
-        // let method_num = $("#method").val();
-        // let field_num = $("#field").val();
-        // let Regionname_num = $("#regionname").val();
-        // let Bedroom_num = $("#Bedroom").val();
-        // let Bathroom_num = $("#Bathroom").val();
-        // let Car_num = $("#Car").val();
-        // let landsize_num = $("#Landsize").val();
-        //
-        //
-        // var updateinfo = {Landsize:landsize_num, Car:Car_num, Bathroom:Bathroom_num,Bedroom:Bathroom_num, Bedroom:Bedroom_num,
-        //                     Regionname:Regionname_num,Field:field_num,Method:method_num,Type:type_num,Rooms:rooms_num};
+        var d=document.getElementById("distance").value;
+        if(d=="") {
+            alert('Distance cannot be null');
+            return;
+        }
+        if (isNaN(d)) {
+            alert('Distance need number');
+            return;
+        }
+        var j=parseInt(d);
+        if(d<0.7 || d>48.1) {
+            alert('Distance need 0.7 - 48.1！');
+            return;
+        }
+
+        var q=document.getElementById("Bedroom").value;
+        if(q=="") {
+            alert('Bedroom cannot be null');
+            return;
+        }
+        if (isNaN(q)) {
+            alert('Bedroom need number');
+            return;
+        }
+        var k=parseInt(q);
+        if(q<0 || q>10) {
+            alert('Bedroom need 0 - 10！');
+            return;
+        }
+        if(q%1 !== 0){
+            alert('Bedroom need integer');
+            return;
+        }
+
+        var t=document.getElementById("Bathroom").value;
+        if(t=="") {
+            alert('Bathroom cannot be null');
+            return;
+        }
+        if (isNaN(t)) {
+            alert('Bathroom need number');
+            return;
+        }
+        var u=parseInt(t);
+        if(t<0 || t>10) {
+            alert('Bathroom need 0 - 8！');
+            return;
+        }
+        if(t%1 !== 0){
+            alert('Bathroom need integer');
+            return;
+        }
 
 
-        //
-        // fetch('http://127.0.0.1:5000/product_predict/',{
-        //     method:'get',
-        //     headers:{
-        //         'accept':'application/json,text/plain, */*',
-        //         'content-type':'application/json',
-        //         //'authorization': 'token ' + au_token
-        //     },
-        //     body: JSON.stringify(updateinfo)
-        // }).then(res=>res.json())
-        //     .then(res=> console.log(res));
-        // let value = getvalue();
-        //
-
-
-        //
-        // fetch('https://github.com/DaKoala/fetch-example/blob/master/people.json')
-        //     .then(res => res.json())
-        //     .then(json => console.log(json))
+        var p=document.getElementById("Car").value;
+        if(p=="") {
+            alert('Parking Sopt cannot be null');
+            return;
+        }
+        if (isNaN(p)) {
+            alert('Parking Sopt need number');
+            return;
+        }
+        var g=parseInt(p);
+        if(p<0 || p>10) {
+            alert('Parking Sopt need 0 - 10！');
+            return;
+        }
+        if(p%1 !== 0){
+            alert('Parking Sopt need integer');
+            return;
+		}	
+			
+        var y=document.getElementById("Landsize").value;
+        if(y=="") {
+            alert('Land Size cannot be null');
+            return;
+        }
+        if (isNaN(y)) {
+            alert('Land Size need number');
+            return;
+        }
+        var b=parseInt(y);
+        if(y<0 || y>76000) {
+            alert('Land Size need 0 - 76000！');
+            return;
+        }
+        if(y%1 !== 0){
+            alert('Land Size need integer');
+            return;
+			
+        }
 
 
     }
-    function getvalue(){
 
-    }
+
+
 
 </script>
 </body>
