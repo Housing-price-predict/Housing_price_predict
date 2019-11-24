@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Predict House Prices</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <style>
+        div, span {
+            text-align: center;
+            margin-top: 20px;
+            justify-content: left;
+            font-size: 1.2rem;
+        }
+
+        input, select {
+            border: 2px #173E82 solid;
+            width: 200px;
+            height: 50px;
+        }
+
+        #contentInput div {
+            margin-left: 20px;
+        }
+
+        input {
+            font-size: 1.2rem;
+        }
+
+        option {
+            padding-top: 25px;
+            padding-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div style="border: 2px solid #173E82;display: flex;flex-direction: column;width: 1000px;height: 700px;margin: auto;"
+     id="contentInput">
+    <div style="font-size: 1.5rem;margin-top: 20px;">
+        predict house prices
+    </div>
+    <div style="font-size: 1.2rem;margin-top: 20px;">
+        Please input your house information:
+    </div>
+
+    <form action="/" method="POST">
+
+    <div style="flex-direction: row;display: flex;">
+        <div><span>Rooms:</span>
+            <input placeholder="1 - 16" class="input_style" name="room"
+{#                   pattern="\d{2}" oninvalid="setCustomValidity('have to 1 - 16');"#}
+                   οninput="setCustomValidity('');" />
+
+        </div>
+        <div>
+            <span>Type:</span>
+            <select type="text" id="type" value ="" name="type">
+                <option value=" " style='display: none'></option>
+                <option value="h">house</option>
+                <option value="t">town house</option>
+                <option value="u">unit</option>
+            </select>
+        </div>
+    </div>
+    <div style="flex-direction: row;display: flex;">
+        <div>
+            <span>Method:</span>
+            <select type="text" id="method" name="method">
+                <option value ="" style='display: none'></option>
+                <option value="VB">VB</option>
+                <option value="SP">SP</option>
+                <option value="S">S</option>
+                <option value="PI">PI</option>
+            </select>
+        </div>
+        <div>
+            <span>Field:</span>
+            <select type="text" id="field" name="field">
+                <option value ="" style='display: none'></option>
+                <option value ="ABBOTSFORD">ABBOTSFORD</option>
+                <option value ="ABERFELDIE">ABERFELDIE</option>
+                <option value ="AIRPORT WEST">AIRPORT WEST</option>
+                <option value ="ALBANVALE">ALBANVALE</option>
+                <option value ="ALBERT PARK">ALBERT PARK</option>
+                <option value ="ALBION">ALBION</option>
+                <option value ="ALPHINGTON">ALPHINGTON</option>
+                <option value ="ALTONA">ALTONA</option>
+                <option value ="ALTONA EAST">ALTONA EAST</option>
+                <option value ="ALTONA GATE">ALTONA GATE</option>
+                <option value ="ALTONA MEADOWS">ALTONA MEADOWS</option>
+                <option value ="ALTONA NORTH">ALTONA NORTH</option>
+                <option value ="ARDEER">ARDEER</option>
+                <option value ="ARMADALE">ARMADALE</option>
+                <option value ="ARMADALE NORTH">ARMADALE NORTH</option>
+                <option value ="ARTHURS CREEK">ARTHURS CREEK</option>
+                <option value ="ASCOT VALE">ASCOT VALE</option>
+                <option value ="ASHBURTON">ASHBURTON</option>
+                <option value ="ASHWOOD">ASHWOOD</option>
+                <option value ="ASPENDALE">ASPENDALE</option>
+                <option value ="ASPENDALE GARDENS">ASPENDALE GARDENS</option>
+                <option value ="ATTWOOD">ATTWOOD</option>
+                <option value ="AUBURN">AUBURN</option>
+                <option value ="AUBURN SOUTH">AUBURN SOUTH</option>
+                <option value ="AVONDALE HEIGHTS">AVONDALE HEIGHTS</option>
+                <option value ="AVONSLEIGH">AVONSLEIGH</option>
+                <option value ="BACCHUS MARSH">BACCHUS MARSH</option>
+                <option value ="BADGER CREEK">BADGER CREEK</option>
+                <option value ="BALACLAVA">BALACLAVA</option>
+                <option value ="BALLIANG">BALLIANG</option>
+                <option value ="BALLIANG EAST">BALLIANG EAST</option>
+                <option value ="BALWYN">BALWYN</option>
+                <option value ="BALWYN EAST">BALWYN EAST</option>
+                <option value ="BALWYN NORTH">BALWYN NORTH</option>
+                <option value ="BANGHOLME">BANGHOLME</option>
+                <option value ="BANYULE">BANYULE</option>
+                <option value ="BATMAN">BATMAN</option>
+                <option value ="BAYSWATER">BAYSWATER</option>
+                <option value ="BAYSWATER NORTH">BAYSWATER NORTH</option>
+                <option value ="BEACONSFIELD">BEACONSFIELD</option>
+                <option value ="BEACONSFIELD UPPER">BEACONSFIELD UPPER</option>
+                <option value ="BEAUMARIS">BEAUMARIS</option>
+                <option value ="BEDFORD ROAD">BEDFORD ROAD</option>
+                <option value ="BEENAK">BEENAK</option>
+                <option value ="BELGRAVE">BELGRAVE</option>
+                <option value ="BELGRAVE HEIGHTS">BELGRAVE HEIGHTS</option>
+                <option value ="BELGRAVE SOUTH">BELGRAVE SOUTH</option>
+                <option value ="BELLFIELD">BELLFIELD</option>
+                <option value ="BELVEDERE PARK">BELVEDERE PARK</option>
+                <option value ="BENNETTSWOOD">BENNETTSWOOD</option>
+                <option value ="BENTLEIGH">BENTLEIGH</option>
+                <option value ="BENTLEIGH EAST">BENTLEIGH EAST</option>
+                <option value ="BERWICK">BERWICK</option>
+                <option value ="BLACK ROCK">BLACK ROCK</option>
+                <option value ="BLACK ROCK NORTH">BLACK ROCK NORTH</option>
+                <option value ="BLACKBURN">BLACKBURN</option>
+                <option value ="BLACKBURN NORTH">BLACKBURN NORTH</option>
+                <option value ="BLACKBURN SOUTH">BLACKBURN SOUTH</option>
+                <option value ="BLIND BIGHT">BLIND BIGHT</option>
+                <option value ="BONBEACH">BONBEACH</option>
+                <option value ="BONNIE BROOK">BONNIE BROOK</option>
+                <option value ="BOORAN ROAD PO">BOORAN ROAD PO</option>
+                <option value ="BORONIA">BORONIA</option>
+                <option value ="BOTANIC RIDGE">BOTANIC RIDGE</option>
+                <option value ="BOX HILL">BOX HILL</option>
+                <option value ="BOX HILL CENTRAL">BOX HILL CENTRAL</option>
+                <option value ="BOX HILL SOUTH">BOX HILL SOUTH</option>
+                <option value ="BRAESIDE">BRAESIDE</option>
+                <option value ="BRANDON PARK">BRANDON PARK</option>
+                <option value ="BRAYBROOK">BRAYBROOK</option>
+                <option value ="BRAYBROOK NORTH">BRAYBROOK NORTH</option>
+                <option value ="BRENTFORD SQUARE">BRENTFORD SQUARE</option>
+                <option value ="BRIAR HILL">BRIAR HILL</option>
+                <option value ="BRIGHTON">BRIGHTON</option>
+                <option value ="BRIGHTON EAST">BRIGHTON EAST</option>
+                <option value ="BRIGHTON NORTH">BRIGHTON NORTH</option>
+                <option value ="BRIGHTON ROAD">BRIGHTON ROAD</option>
+                <option value ="BROADMEADOWS">BROADMEADOWS</option>
+                <option value ="BROOKFIELD">BROOKFIELD</option>
+                <option value ="BROOKLYN">BROOKLYN</option>
+                <option value ="BRUCES CREEK">BRUCES CREEK</option>
+                <option value ="BRUNSWICK">BRUNSWICK</option>
+                <option value ="BRUNSWICK EAST">BRUNSWICK EAST</option>
+                <option value ="BRUNSWICK LOWER">BRUNSWICK LOWER</option>
+                <option value ="BRUNSWICK NORTH">BRUNSWICK NORTH</option>
+                <option value ="BRUNSWICK SOUTH">BRUNSWICK SOUTH</option>
+                <option value ="BRUNSWICK WEST">BRUNSWICK WEST</option>
+                <option value ="BULLA">BULLA</option>
+                <option value ="BULLEEN">BULLEEN</option>
+                <option value ="BULLEEN SOUTH">BULLEEN SOUTH</option>
+                <option value ="BULLENGAROOK">BULLENGAROOK</option>
+                <option value ="BUNDOORA">BUNDOORA</option>
+                <option value ="BURNLEY">BURNLEY</option>
+                <option value ="BURNLEY NORTH">BURNLEY NORTH</option>
+                <option value ="BURNSIDE">BURNSIDE</option>
+                <option value ="BURNSIDE HEIGHTS">BURNSIDE HEIGHTS</option>
+                <option value ="BURWOOD">BURWOOD</option>
+                <option value ="BURWOOD EAST">BURWOOD EAST</option>
+                <option value ="BURWOOD HEIGHTS">BURWOOD HEIGHTS</option>
+                <option value ="CAIRNLEA">CAIRNLEA</option>
+                <option value ="CALDER PARK">CALDER PARK</option>
+                <option value ="CAMBERWELL">CAMBERWELL</option>
+                <option value ="CAMBERWELL EAST">CAMBERWELL EAST</option>
+                <option value ="CAMBERWELL NORTH">CAMBERWELL NORTH</option>
+                <option value ="CAMBERWELL SOUTH">CAMBERWELL SOUTH</option>
+                <option value ="CAMBERWELL WEST">CAMBERWELL WEST</option>
+                <option value ="CAMPBELLFIELD">CAMPBELLFIELD</option>
+                <option value ="CANNONS CREEK">CANNONS CREEK</option>
+                <option value ="CANTERBURY">CANTERBURY</option>
+                <option value ="CARDINIA">CARDINIA</option>
+                <option value ="CARLTON">CARLTON</option>
+                <option value ="CARLTON NORTH">CARLTON NORTH</option>
+                <option value ="CARLTON SOUTH">CARLTON SOUTH</option>
+                <option value ="CARNEGIE">CARNEGIE</option>
+                <option value ="CAROLINE SPRINGS">CAROLINE SPRINGS</option>
+                <option value ="CARRUM">CARRUM</option>
+                <option value ="CARRUM DOWNS">CARRUM DOWNS</option>
+                <option value ="CASTELLA">CASTELLA</option>
+                <option value ="CAULFIELD">CAULFIELD</option>
+                <option value ="CAULFIELD EAST">CAULFIELD EAST</option>
+                <option value ="CAULFIELD JUNCTION">CAULFIELD JUNCTION</option>
+                <option value ="CAULFIELD NORTH">CAULFIELD NORTH</option>
+                <option value ="CAULFIELD SOUTH">CAULFIELD SOUTH</option>
+                <option value ="CENTRAL PARK">CENTRAL PARK</option>
+                <option value ="CHADSTONE">CHADSTONE</option>
+                <option value ="CHADSTONE CENTRE">CHADSTONE CENTRE</option>
+                <option value ="CHAPEL STREET NORTH">CHAPEL STREET NORTH</option>
+                <option value ="CHARTWELL">CHARTWELL</option>
+                <option value ="CHELSEA">CHELSEA</option>
+                <option value ="CHELSEA HEIGHTS">CHELSEA HEIGHTS</option>
+                <option value ="CHELTENHAM">CHELTENHAM</option>
+                <option value ="CHELTENHAM EAST">CHELTENHAM EAST</option>
+                <option value ="CHELTENHAM NORTH">CHELTENHAM NORTH</option>
+                <option value ="CHINTIN">CHINTIN</option>
+                <option value ="CHIRNSIDE PARK">CHIRNSIDE PARK</option>
+                <option value ="CHRISTMAS HILLS">CHRISTMAS HILLS</option>
+                <option value ="CHUM CREEK">CHUM CREEK</option>
+                <option value ="CLARINDA">CLARINDA</option>
+                <option value ="CLAYTON">CLAYTON</option>
+                <option value ="CLAYTON SOUTH">CLAYTON SOUTH</option>
+                <option value ="CLEMATIS">CLEMATIS</option>
+                <option value ="CLIFTON HILL">CLIFTON HILL</option>
+                <option value ="CLYDE">CLYDE</option>
+                <option value ="CLYDE NORTH">CLYDE NORTH</option>
+                <option value ="COATESVILLE">COATESVILLE</option>
+                <option value ="COBBLEBANK">COBBLEBANK</option>
+                <option value ="COBURG">COBURG</option>
+                <option value ="COBURG NORTH">COBURG NORTH</option>
+                <option value ="COCKATOO">COCKATOO</option>
+                <option value ="COCOROC">COCOROC</option>
+                <option value ="COIMADAI">COIMADAI</option>
+                <option value ="COLDSTREAM">COLDSTREAM</option>
+                <option value ="COLLINGWOOD">COLLINGWOOD</option>
+                <option value ="COLLINGWOOD NORTH">COLLINGWOOD NORTH</option>
+                <option value ="COOLAROO">COOLAROO</option>
+                <option value ="COTHAM">COTHAM</option>
+                <option value ="COTTLES BRIDGE">COTTLES BRIDGE</option>
+                <option value ="CRAIGIEBURN">CRAIGIEBURN</option>
+                <option value ="CRANBOURNE">CRANBOURNE</option>
+                <option value ="CRANBOURNE EAST">CRANBOURNE EAST</option>
+                <option value ="CRANBOURNE NORTH">CRANBOURNE NORTH</option>
+                <option value ="CRANBOURNE SOUTH">CRANBOURNE SOUTH</option>
+                <option value ="CRANBOURNE WEST">CRANBOURNE WEST</option>
+                <option value ="CREMORNE">CREMORNE</option>
+                <option value ="CROMER">CROMER</option>
+                <option value ="CROSS KEYS">CROSS KEYS</option>
+                <option value ="CROYDON">CROYDON</option>
+                <option value ="CROYDON HILLS">CROYDON HILLS</option>
+                <option value ="CROYDON NORTH">CROYDON NORTH</option>
+                <option value ="CROYDON SOUTH">CROYDON SOUTH</option>
+                <option value ="DALES CREEK">DALES CREEK</option>
+                <option value ="DALLAS">DALLAS</option>
+                <option value ="DANDENONG">DANDENONG</option>
+                <option value ="DANDENONG EAST">DANDENONG EAST</option>
+                <option value ="DANDENONG NORTH">DANDENONG NORTH</option>
+                <option value ="DANDENONG SOUTH">DANDENONG SOUTH</option>
+                <option value ="DARLEY">DARLEY</option>
+                <option value ="DARLING">DARLING</option>
+                <option value ="DARLING SOUTH">DARLING SOUTH</option>
+                <option value ="DARRAWEIT GUIM">DARRAWEIT GUIM</option>
+                <option value ="DEEPDENE">DEEPDENE</option>
+                <option value ="DEEPDENE DC">DEEPDENE DC</option>
+                <option value ="DEER PARK">DEER PARK</option>
+                <option value ="DEER PARK EAST">DEER PARK EAST</option>
+                <option value ="DEER PARK NORTH">DEER PARK NORTH</option>
+                <option value ="DELAHEY">DELAHEY</option>
+                <option value ="DENDY">DENDY</option>
+                <option value ="DERRIMUT">DERRIMUT</option>
+                <option value ="DEVON MEADOWS">DEVON MEADOWS</option>
+                <option value ="DEWHURST">DEWHURST</option>
+                <option value ="DIAMOND CREEK">DIAMOND CREEK</option>
+                <option value ="DIGGERS REST">DIGGERS REST</option>
+                <option value ="DINGLEY VILLAGE">DINGLEY VILLAGE</option>
+                <option value ="DIXONS CREEK">DIXONS CREEK</option>
+                <option value ="DOCKLANDS">DOCKLANDS</option>
+                <option value ="DOMAIN ROAD PO">DOMAIN ROAD PO</option>
+                <option value ="DON VALLEY">DON VALLEY</option>
+                <option value ="DONCASTER">DONCASTER</option>
+                <option value ="DONCASTER EAST">DONCASTER EAST</option>
+                <option value ="DONCASTER HEIGHTS">DONCASTER HEIGHTS</option>
+                <option value ="DONNYBROOK">DONNYBROOK</option>
+                <option value ="DONVALE">DONVALE</option>
+                <option value ="DOREEN">DOREEN</option>
+                <option value ="DOVETON">DOVETON</option>
+                <option value ="DUNEARN">DUNEARN</option>
+                <option value ="EAGLEMONT">EAGLEMONT</option>
+                <option value ="EAST MELBOURNE">EAST MELBOURNE</option>
+                <option value ="EDEN PARK">EDEN PARK</option>
+                <option value ="EDITHVALE">EDITHVALE</option>
+                <option value ="ELSTERNWICK">ELSTERNWICK</option>
+                <option value ="ELTHAM">ELTHAM</option>
+                <option value ="ELTHAM NORTH">ELTHAM NORTH</option>
+                <option value ="ELWOOD">ELWOOD</option>
+                <option value ="EMERALD">EMERALD</option>
+                <option value ="ENDEAVOUR HILLS">ENDEAVOUR HILLS</option>
+                <option value ="EPPING">EPPING</option>
+                <option value ="EPPING DC">EPPING DC</option>
+                <option value ="ESSENDON">ESSENDON</option>
+                <option value ="ESSENDON FIELDS">ESSENDON FIELDS</option>
+                <option value ="ESSENDON NORTH">ESSENDON NORTH</option>
+                <option value ="ESSENDON WEST">ESSENDON WEST</option>
+                <option value ="EUMEMMERRING">EUMEMMERRING</option>
+                <option value ="EXFORD">EXFORD</option>
+                <option value ="EYNESBURY">EYNESBURY</option>
+                <option value ="FAIRFIELD">FAIRFIELD</option>
+                <option value ="FAWKNER">FAWKNER</option>
+                <option value ="FAWKNER EAST">FAWKNER EAST</option>
+                <option value ="FAWKNER NORTH">FAWKNER NORTH</option>
+                <option value ="FERNTREE GULLY">FERNTREE GULLY</option>
+                <option value ="FERNY CREEK">FERNY CREEK</option>
+                <option value ="FIELDSTONE">FIELDSTONE</option>
+                <option value ="FITZROY">FITZROY</option>
+                <option value ="FITZROY NORTH">FITZROY NORTH</option>
+                <option value ="FIVE WAYS">FIVE WAYS</option>
+                <option value ="FLEMINGTON">FLEMINGTON</option>
+                <option value ="FOOTSCRAY">FOOTSCRAY</option>
+                <option value ="FOREST HILL">FOREST HILL</option>
+                <option value ="FOUNTAIN GATE">FOUNTAIN GATE</option>
+                <option value ="FRANKSTON">FRANKSTON</option>
+                <option value ="FRANKSTON EAST">FRANKSTON EAST</option>
+                <option value ="FRANKSTON HEIGHTS">FRANKSTON HEIGHTS</option>
+                <option value ="FRANKSTON NORTH">FRANKSTON NORTH</option>
+                <option value ="FRANKSTON SOUTH">FRANKSTON SOUTH</option>
+                <option value ="GARDEN CITY">GARDEN CITY</option>
+                <option value ="GARDENVALE">GARDENVALE</option>
+                <option value ="GILBERTON">GILBERTON</option>
+                <option value ="GILDEROY">GILDEROY</option>
+                <option value ="GISBORNE">GISBORNE</option>
+                <option value ="GISBORNE SOUTH">GISBORNE SOUTH</option>
+                <option value ="GLADSTONE PARK">GLADSTONE PARK</option>
+                <option value ="GLADYSDALE">GLADYSDALE</option>
+                <option value ="GLEN HUNTLY">GLEN HUNTLY</option>
+                <option value ="GLEN IRIS">GLEN IRIS</option>
+                <option value ="GLEN WAVERLEY">GLEN WAVERLEY</option>
+                <option value ="GLENFERRIE SOUTH">GLENFERRIE SOUTH</option>
+                <option value ="GLENGALA">GLENGALA</option>
+                <option value ="GLENMORE">GLENMORE</option>
+                <option value ="GLENROY">GLENROY</option>
+                <option value ="GOWANBRAE">GOWANBRAE</option>
+                <option value ="GRANGEFIELDS">GRANGEFIELDS</option>
+                <option value ="GREENDALE">GREENDALE</option>
+                <option value ="GREENSBOROUGH">GREENSBOROUGH</option>
+                <option value ="GREENVALE">GREENVALE</option>
+                <option value ="GREYTHORN">GREYTHORN</option>
+                <option value ="GRUYERE">GRUYERE</option>
+                <option value ="GUYS HILL">GUYS HILL</option>
+                <option value ="HADFIELD">HADFIELD</option>
+                <option value ="HALLAM">HALLAM</option>
+                <option value ="HAMPTON">HAMPTON</option>
+                <option value ="HAMPTON EAST">HAMPTON EAST</option>
+                <option value ="HAMPTON NORTH">HAMPTON NORTH</option>
+                <option value ="HAMPTON PARK">HAMPTON PARK</option>
+                <option value ="HARKAWAY">HARKAWAY</option>
+                <option value ="HARKNESS">HARKNESS</option>
+                <option value ="HARTWELL">HARTWELL</option>
+                <option value ="HAWKSBURN">HAWKSBURN</option>
+                <option value ="HAWTHORN">HAWTHORN</option>
+                <option value ="HAWTHORN EAST">HAWTHORN EAST</option>
+                <option value ="HAWTHORN NORTH">HAWTHORN NORTH</option>
+                <option value ="HAWTHORN WEST">HAWTHORN WEST</option>
+                <option value ="HEALESVILLE">HEALESVILLE</option>
+                <option value ="HEALESVILLE MAIN STREET">HEALESVILLE MAIN STREET</option>
+                <option value ="HEALESVILLE POST SHOP">HEALESVILLE POST SHOP</option>
+                <option value ="HEATHERTON">HEATHERTON</option>
+                <option value ="HEATHMONT">HEATHMONT</option>
+                <option value ="HEATHWOOD">HEATHWOOD</option>
+                <option value ="HEIDELBERG">HEIDELBERG</option>
+                <option value ="HEIDELBERG HEIGHTS">HEIDELBERG HEIGHTS</option>
+                <option value ="HEIDELBERG RGH">HEIDELBERG RGH</option>
+                <option value ="HEIDELBERG WEST">HEIDELBERG WEST</option>
+                <option value ="HIDDEN VALLEY">HIDDEN VALLEY</option>
+                <option value ="HIGHETT">HIGHETT</option>
+                <option value ="HIGHPOINT CITY">HIGHPOINT CITY</option>
+                <option value ="HILLSIDE">HILLSIDE</option>
+                <option value ="HODDLES CREEK">HODDLES CREEK</option>
+                <option value ="HOLMESGLEN">HOLMESGLEN</option>
+                <option value ="HOPETOUN GARDENS">HOPETOUN GARDENS</option>
+                <option value ="HOPETOUN PARK">HOPETOUN PARK</option>
+                <option value ="HOPPERS CROSSING">HOPPERS CROSSING</option>
+                <option value ="HOTHAM HILL">HOTHAM HILL</option>
+                <option value ="HOUSTON">HOUSTON</option>
+                <option value ="HUGHESDALE">HUGHESDALE</option>
+                <option value ="HUMEVALE">HUMEVALE</option>
+                <option value ="HUNTINGDALE">HUNTINGDALE</option>
+                <option value ="HURSTBRIDGE">HURSTBRIDGE</option>
+                <option value ="IVANHOE">IVANHOE</option>
+                <option value ="IVANHOE EAST">IVANHOE EAST</option>
+                <option value ="IVANHOE NORTH">IVANHOE NORTH</option>
+                <option value ="JACANA">JACANA</option>
+                <option value ="JORDANVILLE">JORDANVILLE</option>
+                <option value ="JUNCTION VILLAGE">JUNCTION VILLAGE</option>
+                <option value ="KALKALLO">KALKALLO</option>
+                <option value ="KALLISTA">KALLISTA</option>
+                <option value ="KALORAMA">KALORAMA</option>
+                <option value ="KARINGAL">KARINGAL</option>
+                <option value ="KARINGAL CENTRE">KARINGAL CENTRE</option>
+                <option value ="KEALBA">KEALBA</option>
+                <option value ="KEILOR">KEILOR</option>
+                <option value ="KEILOR DOWNS">KEILOR DOWNS</option>
+                <option value ="KEILOR EAST">KEILOR EAST</option>
+                <option value ="KEILOR LODGE">KEILOR LODGE</option>
+                <option value ="KEILOR NORTH">KEILOR NORTH</option>
+                <option value ="KEILOR PARK">KEILOR PARK</option>
+                <option value ="KENSINGTON">KENSINGTON</option>
+                <option value ="KEON PARK">KEON PARK</option>
+                <option value ="KEW">KEW</option>
+                <option value ="KEW EAST">KEW EAST</option>
+                <option value ="KEYSBOROUGH">KEYSBOROUGH</option>
+                <option value ="KILSYTH">KILSYTH</option>
+                <option value ="KILSYTH SOUTH">KILSYTH SOUTH</option>
+                <option value ="KINGLAKE CENTRAL">KINGLAKE CENTRAL</option>
+                <option value ="KINGLAKE WEST">KINGLAKE WEST</option>
+                <option value ="KINGS PARK">KINGS PARK</option>
+                <option value ="KINGSBURY">KINGSBURY</option>
+                <option value ="KINGSVILLE">KINGSVILLE</option>
+                <option value ="KINGSVILLE WEST">KINGSVILLE WEST</option>
+                <option value ="KNOX CITY CENTRE">KNOX CITY CENTRE</option>
+                <option value ="KNOXFIELD">KNOXFIELD</option>
+                <option value ="KOOYONG">KOOYONG</option>
+                <option value ="KOROBEIT">KOROBEIT</option>
+                <option value ="KURUNJANG">KURUNJANG</option>
+                <option value ="LA TROBE UNIVERSITY">LA TROBE UNIVERSITY</option>
+                <option value ="LABURNUM">LABURNUM</option>
+                <option value ="LALOR">LALOR</option>
+                <option value ="LALOR PLAZA">LALOR PLAZA</option>
+                <option value ="LANGWARRIN">LANGWARRIN</option>
+                <option value ="LAUNCHING PLACE">LAUNCHING PLACE</option>
+                <option value ="LAVERTON">LAVERTON</option>
+                <option value ="LAVERTON RAAF">LAVERTON RAAF</option>
+                <option value ="LILYDALE">LILYDALE</option>
+                <option value ="LONG FOREST">LONG FOREST</option>
+                <option value ="LOWER PLENTY">LOWER PLENTY</option>
+                <option value ="LYGON STREET NORTH">LYGON STREET NORTH</option>
+                <option value ="LYNBROOK">LYNBROOK</option>
+                <option value ="LYNDHURST">LYNDHURST</option>
+                <option value ="LYSTERFIELD">LYSTERFIELD</option>
+                <option value ="LYSTERFIELD SOUTH">LYSTERFIELD SOUTH</option>
+                <option value ="MACCLESFIELD">MACCLESFIELD</option>
+                <option value ="MACLEOD">MACLEOD</option>
+                <option value ="MACLEOD WEST">MACLEOD WEST</option>
+                <option value ="MADDINGLEY">MADDINGLEY</option>
+                <option value ="MAIDSTONE">MAIDSTONE</option>
+                <option value ="MALVERN">MALVERN</option>
+                <option value ="MALVERN EAST">MALVERN EAST</option>
+                <option value ="MALVERN NORTH">MALVERN NORTH</option>
+                <option value ="MAMBOURIN">MAMBOURIN</option>
+                <option value ="MANOR LAKES">MANOR LAKES</option>
+                <option value ="MARIBYRNONG">MARIBYRNONG</option>
+                <option value ="MCKINNON">MCKINNON</option>
+                <option value ="MEADOW HEIGHTS">MEADOW HEIGHTS</option>
+                <option value ="MELBOURNE">MELBOURNE</option>
+                <option value ="MELBOURNE UNIVERSITY">MELBOURNE UNIVERSITY</option>
+                <option value ="MELTON">MELTON</option>
+                <option value ="MELTON SOUTH">MELTON SOUTH</option>
+                <option value ="MELTON WEST">MELTON WEST</option>
+                <option value ="MENTONE">MENTONE</option>
+                <option value ="MENTONE EAST">MENTONE EAST</option>
+                <option value ="MERLYNSTON">MERLYNSTON</option>
+                <option value ="MERNDA">MERNDA</option>
+                <option value ="MERRIMU">MERRIMU</option>
+                <option value ="MICKLEHAM">MICKLEHAM</option>
+                <option value ="MIDDLE CAMBERWELL">MIDDLE CAMBERWELL</option>
+                <option value ="MIDDLE PARK">MIDDLE PARK</option>
+                <option value ="MILL PARK">MILL PARK</option>
+                <option value ="MITCHAM">MITCHAM</option>
+                <option value ="MITCHAM NORTH">MITCHAM NORTH</option>
+                <option value ="MONBULK">MONBULK</option>
+                <option value ="MONT ALBERT">MONT ALBERT</option>
+                <option value ="MONTMORENCY">MONTMORENCY</option>
+                <option value ="MONTROSE">MONTROSE</option>
+                <option value ="MOONEE PONDS">MOONEE PONDS</option>
+                <option value ="MOONEE VALE">MOONEE VALE</option>
+                <option value ="MOORABBIN">MOORABBIN</option>
+                <option value ="MOORABBIN AIRPORT">MOORABBIN AIRPORT</option>
+                <option value ="MOORABBIN EAST">MOORABBIN EAST</option>
+                <option value ="MOOROOLBARK">MOOROOLBARK</option>
+                <option value ="MORANG SOUTH">MORANG SOUTH</option>
+                <option value ="MORDIALLOC">MORDIALLOC</option>
+                <option value ="MORDIALLOC NORTH">MORDIALLOC NORTH</option>
+                <option value ="MORELAND">MORELAND</option>
+                <option value ="MORELAND WEST">MORELAND WEST</option>
+                <option value ="MOUNT BURNETT">MOUNT BURNETT</option>
+                <option value ="MOUNT COTTRELL">MOUNT COTTRELL</option>
+                <option value ="MOUNT DANDENONG">MOUNT DANDENONG</option>
+                <option value ="MOUNT EVELYN">MOUNT EVELYN</option>
+                <option value ="MOUNT TOOLEBEWONG">MOUNT TOOLEBEWONG</option>
+                <option value ="MOUNT WAVERLEY">MOUNT WAVERLEY</option>
+                <option value ="MOUNTAIN GATE">MOUNTAIN GATE</option>
+                <option value ="MULGRAVE">MULGRAVE</option>
+                <option value ="MURRUMBEENA">MURRUMBEENA</option>
+                <option value ="MYRNIONG">MYRNIONG</option>
+                <option value ="NANGANA">NANGANA</option>
+                <option value ="NARRE WARREN">NARRE WARREN</option>
+                <option value ="NARRE WARREN SOUTH">NARRE WARREN SOUTH</option>
+                <option value ="NEW GISBORNE">NEW GISBORNE</option>
+                <option value ="NEWPORT">NEWPORT</option>
+                <option value ="NIDDRIE">NIDDRIE</option>
+                <option value ="NIDDRIE NORTH">NIDDRIE NORTH</option>
+                <option value ="NOBLE PARK">NOBLE PARK</option>
+                <option value ="NOBLE PARK EAST">NOBLE PARK EAST</option>
+                <option value ="NOBLE PARK NORTH">NOBLE PARK NORTH</option>
+                <option value ="NORTH MELBOURNE">NORTH MELBOURNE</option>
+                <option value ="NORTH ROAD">NORTH ROAD</option>
+                <option value ="NORTH WARRANDYTE">NORTH WARRANDYTE</option>
+                <option value ="NORTHCOTE">NORTHCOTE</option>
+                <option value ="NORTHCOTE SOUTH">NORTHCOTE SOUTH</option>
+                <option value ="NORTHLAND CENTRE">NORTHLAND CENTRE</option>
+                <option value ="NOTTING HILL">NOTTING HILL</option>
+                <option value ="NUNAWADING">NUNAWADING</option>
+                <option value ="NUTFIELD">NUTFIELD</option>
+                <option value ="OAK PARK">OAK PARK</option>
+                <option value ="OAKLANDS JUNCTION">OAKLANDS JUNCTION</option>
+                <option value ="OAKLEIGH">OAKLEIGH</option>
+                <option value ="OAKLEIGH EAST">OAKLEIGH EAST</option>
+                <option value ="OAKLEIGH SOUTH">OAKLEIGH SOUTH</option>
+                <option value ="OFFICER">OFFICER</option>
+                <option value ="OFFICER SOUTH">OFFICER SOUTH</option>
+                <option value ="OLINDA">OLINDA</option>
+                <option value ="ORMOND">ORMOND</option>
+                <option value ="PAKENHAM">PAKENHAM</option>
+                <option value ="PAKENHAM SOUTH">PAKENHAM SOUTH</option>
+                <option value ="PAKENHAM UPPER">PAKENHAM UPPER</option>
+                <option value ="PANTON HILL">PANTON HILL</option>
+                <option value ="PARK ORCHARDS">PARK ORCHARDS</option>
+                <option value ="PARKDALE">PARKDALE</option>
+                <option value ="PARKVILLE">PARKVILLE</option>
+                <option value ="PARWAN">PARWAN</option>
+                <option value ="PASCOE VALE">PASCOE VALE</option>
+                <option value ="PASCOE VALE SOUTH">PASCOE VALE SOUTH</option>
+                <option value ="PATTERSON">PATTERSON</option>
+                <option value ="PATTERSON LAKES">PATTERSON LAKES</option>
+                <option value ="PENTLAND HILLS">PENTLAND HILLS</option>
+                <option value ="PHEASANT CREEK">PHEASANT CREEK</option>
+                <option value ="PINES FOREST">PINES FOREST</option>
+                <option value ="PINEWOOD">PINEWOOD</option>
+                <option value ="PLENTY">PLENTY</option>
+                <option value ="PLUMPTON">PLUMPTON</option>
+                <option value ="POINT COOK">POINT COOK</option>
+                <option value ="PORT MELBOURNE">PORT MELBOURNE</option>
+                <option value ="POWELLTOWN">POWELLTOWN</option>
+                <option value ="PRAHRAN">PRAHRAN</option>
+                <option value ="PRAHRAN EAST">PRAHRAN EAST</option>
+                <option value ="PRESTON">PRESTON</option>
+                <option value ="PRESTON LOWER">PRESTON LOWER</option>
+                <option value ="PRESTON SOUTH">PRESTON SOUTH</option>
+                <option value ="PRESTON WEST">PRESTON WEST</option>
+                <option value ="PRINCES HILL">PRINCES HILL</option>
+                <option value ="QUANDONG">QUANDONG</option>
+                <option value ="RANGEVIEW">RANGEVIEW</option>
+                <option value ="RAVENHALL">RAVENHALL</option>
+                <option value ="REGENT WEST">REGENT WEST</option>
+                <option value ="RESEARCH">RESEARCH</option>
+                <option value ="RESERVOIR">RESERVOIR</option>
+                <option value ="RESERVOIR EAST">RESERVOIR EAST</option>
+                <option value ="RESERVOIR NORTH">RESERVOIR NORTH</option>
+                <option value ="RESERVOIR SOUTH">RESERVOIR SOUTH</option>
+                <option value ="RICHMOND">RICHMOND</option>
+                <option value ="RICHMOND EAST">RICHMOND EAST</option>
+                <option value ="RICHMOND NORTH">RICHMOND NORTH</option>
+                <option value ="RICHMOND SOUTH">RICHMOND SOUTH</option>
+                <option value ="RIDDELLS CREEK">RIDDELLS CREEK</option>
+                <option value ="RINGWOOD">RINGWOOD</option>
+                <option value ="RINGWOOD EAST">RINGWOOD EAST</option>
+                <option value ="RINGWOOD NORTH">RINGWOOD NORTH</option>
+                <option value ="RIPPONLEA">RIPPONLEA</option>
+                <option value ="ROBINSON">ROBINSON</option>
+                <option value ="ROCKBANK">ROCKBANK</option>
+                <option value ="ROSANNA">ROSANNA</option>
+                <option value ="ROWSLEY">ROWSLEY</option>
+                <option value ="ROWVILLE">ROWVILLE</option>
+                <option value ="ROXBURGH PARK">ROXBURGH PARK</option>
+                <option value ="RYTHDALE">RYTHDALE</option>
+                <option value ="SAINT HELENA">SAINT HELENA</option>
+                <option value ="SANDHURST">SANDHURST</option>
+                <option value ="SANDOWN VILLAGE">SANDOWN VILLAGE</option>
+                <option value ="SANDRINGHAM">SANDRINGHAM</option>
+                <option value ="SCORESBY">SCORESBY</option>
+                <option value ="SEABROOK">SEABROOK</option>
+                <option value ="SEAFORD">SEAFORD</option>
+                <option value ="SEAHOLME">SEAHOLME</option>
+                <option value ="SEDDON">SEDDON</option>
+                <option value ="SEDDON WEST">SEDDON WEST</option>
+                <option value ="SEVILLE">SEVILLE</option>
+                <option value ="SEVILLE EAST">SEVILLE EAST</option>
+                <option value ="SILVAN">SILVAN</option>
+                <option value ="SKYE">SKYE</option>
+                <option value ="SOUTH KINGSVILLE">SOUTH KINGSVILLE</option>
+                <option value ="SOUTH MELBOURNE">SOUTH MELBOURNE</option>
+                <option value ="SOUTH MELBOURNE DC">SOUTH MELBOURNE DC</option>
+                <option value ="SOUTH MORANG">SOUTH MORANG</option>
+                <option value ="SOUTH WHARF">SOUTH WHARF</option>
+                <option value ="SOUTH YARRA">SOUTH YARRA</option>
+                <option value ="SOUTHBANK">SOUTHBANK</option>
+                <option value ="SOUTHLAND CENTRE">SOUTHLAND CENTRE</option>
+                <option value ="SPOTSWOOD">SPOTSWOOD</option>
+                <option value ="SPRINGVALE">SPRINGVALE</option>
+                <option value ="SPRINGVALE SOUTH">SPRINGVALE SOUTH</option>
+                <option value ="ST ALBANS">ST ALBANS</option>
+                <option value ="ST HELENA">ST HELENA</option>
+                <option value ="ST KILDA">ST KILDA</option>
+                <option value ="ST KILDA EAST">ST KILDA EAST</option>
+                <option value ="ST KILDA SOUTH">ST KILDA SOUTH</option>
+                <option value ="ST KILDA WEST">ST KILDA WEST</option>
+                <option value ="STAUGHTON VALE">STAUGHTON VALE</option>
+                <option value ="STEELS CREEK">STEELS CREEK</option>
+                <option value ="STRADBROKE PARK">STRADBROKE PARK</option>
+                <option value ="STRATHEWEN">STRATHEWEN</option>
+                <option value ="STRATHMORE">STRATHMORE</option>
+                <option value ="STRATHMORE HEIGHTS">STRATHMORE HEIGHTS</option>
+                <option value ="STRATHTULLOH">STRATHTULLOH</option>
+                <option value ="STUDFIELD">STUDFIELD</option>
+                <option value ="SUMNER">SUMNER</option>
+                <option value ="SUNBURY">SUNBURY</option>
+                <option value ="SUNSHINE">SUNSHINE</option>
+                <option value ="SUNSHINE NORTH">SUNSHINE NORTH</option>
+                <option value ="SUNSHINE WEST">SUNSHINE WEST</option>
+                <option value ="SURREY HILLS">SURREY HILLS</option>
+                <option value ="SURREY HILLS NORTH">SURREY HILLS NORTH</option>
+                <option value ="SURREY HILLS SOUTH">SURREY HILLS SOUTH</option>
+                <option value ="SYDENHAM">SYDENHAM</option>
+                <option value ="SYLVESTER">SYLVESTER</option>
+                <option value ="SYNDAL">SYNDAL</option>
+                <option value ="TARNEIT">TARNEIT</option>
+                <option value ="TARRAWARRA">TARRAWARRA</option>
+                <option value ="TAYLORS HILL">TAYLORS HILL</option>
+                <option value ="TAYLORS LAKES">TAYLORS LAKES</option>
+                <option value ="TECOMA">TECOMA</option>
+                <option value ="TEMPLESTOWE">TEMPLESTOWE</option>
+                <option value ="TEMPLESTOWE LOWER">TEMPLESTOWE LOWER</option>
+                <option value ="THE BASIN">THE BASIN</option>
+                <option value ="THE PINES">THE PINES</option>
+                <option value ="THOMASTOWN">THOMASTOWN</option>
+                <option value ="THORNBURY">THORNBURY</option>
+                <option value ="THORNHILL PARK">THORNHILL PARK</option>
+                <option value ="THREE BRIDGES">THREE BRIDGES</option>
+                <option value ="TOOLANGI">TOOLANGI</option>
+                <option value ="TOOLERN VALE">TOOLERN VALE</option>
+                <option value ="TOORADIN">TOORADIN</option>
+                <option value ="TOORAK">TOORAK</option>
+                <option value ="TOORONGA">TOORONGA</option>
+                <option value ="TOTTENHAM">TOTTENHAM</option>
+                <option value ="TRAVANCORE">TRAVANCORE</option>
+                <option value ="TRUGANINA">TRUGANINA</option>
+                <option value ="TULLAMARINE">TULLAMARINE</option>
+                <option value ="TUNSTALL SQUARE PO">TUNSTALL SQUARE PO</option>
+                <option value ="UPPER FERNTREE GULLY">UPPER FERNTREE GULLY</option>
+                <option value ="UPPER PLENTY">UPPER PLENTY</option>
+                <option value ="UPWEY">UPWEY</option>
+                <option value ="VERMONT">VERMONT</option>
+                <option value ="VERMONT SOUTH">VERMONT SOUTH</option>
+                <option value ="VICTORIA GARDENS">VICTORIA GARDENS</option>
+                <option value ="VIEWBANK">VIEWBANK</option>
+                <option value ="WALLAN">WALLAN</option>
+                <option value ="WALLAN EAST">WALLAN EAST</option>
+                <option value ="WANDIN EAST">WANDIN EAST</option>
+                <option value ="WANDIN NORTH">WANDIN NORTH</option>
+                <option value ="WANTIRNA">WANTIRNA</option>
+                <option value ="WANTIRNA SOUTH">WANTIRNA SOUTH</option>
+                <option value ="WARNEET">WARNEET</option>
+                <option value ="WARRANDYTE">WARRANDYTE</option>
+                <option value ="WARRANDYTE SOUTH">WARRANDYTE SOUTH</option>
+                <option value ="WARRANWOOD">WARRANWOOD</option>
+                <option value ="WATERGARDENS">WATERGARDENS</option>
+                <option value ="WATERWAYS">WATERWAYS</option>
+                <option value ="WATSONIA">WATSONIA</option>
+                <option value ="WATSONIA NORTH">WATSONIA NORTH</option>
+                <option value ="WATTLE GLEN">WATTLE GLEN</option>
+                <option value ="WATTLE PARK">WATTLE PARK</option>
+                <option value ="WATTLETREE ROAD PO">WATTLETREE ROAD PO</option>
+                <option value ="WAVERLEY GARDENS">WAVERLEY GARDENS</option>
+                <option value ="WEIR VIEWS">WEIR VIEWS</option>
+                <option value ="WERE STREET PO">WERE STREET PO</option>
+                <option value ="WERRIBEE">WERRIBEE</option>
+                <option value ="WERRIBEE SOUTH">WERRIBEE SOUTH</option>
+                <option value ="WEST FOOTSCRAY">WEST FOOTSCRAY</option>
+                <option value ="WEST MELBOURNE">WEST MELBOURNE</option>
+                <option value ="WESTMEADOWS">WESTMEADOWS</option>
+                <option value ="WHEELERS HILL">WHEELERS HILL</option>
+                <option value ="WHITTLESEA">WHITTLESEA</option>
+                <option value ="WILDWOOD">WILDWOOD</option>
+                <option value ="WILLIAMS LANDING">WILLIAMS LANDING</option>
+                <option value ="WILLIAMS RAAF">WILLIAMS RAAF</option>
+                <option value ="WILLIAMSTOWN">WILLIAMSTOWN</option>
+                <option value ="WILLIAMSTOWN NORTH">WILLIAMSTOWN NORTH</option>
+                <option value ="WINDSOR">WINDSOR</option>
+                <option value ="WISHART">WISHART</option>
+                <option value ="WOLLERT">WOLLERT</option>
+                <option value ="WONGA PARK">WONGA PARK</option>
+                <option value ="WOORI YALLOCK">WOORI YALLOCK</option>
+                <option value ="WYNDHAM VALE">WYNDHAM VALE</option>
+                <option value ="YALLAMBIE">YALLAMBIE</option>
+                <option value ="YAN YEAN">YAN YEAN</option>
+                <option value ="YARRA GLEN">YARRA GLEN</option>
+                <option value ="YARRA JUNCTION">YARRA JUNCTION</option>
+                <option value ="YARRAVILLE">YARRAVILLE</option>
+                <option value ="YARRAVILLE WEST">YARRAVILLE WEST</option>
+                <option value ="YELLINGBO">YELLINGBO</option>
+                <option value ="YERING">YERING</option>
+                <option value ="YUROKE">YUROKE</option>
+            </select>
+        </div>
+    </div>
+    <div style="flex-direction: row;display: flex;">
+        <div>
+            <span>Regionname:</span>
+            <select  type="text" id="regionname" name="regionname">
+                <option value ="" style='display: none'></option>
+                <option value="Western Victoria">Western Victoria</option>
+                <option value="Southern Metropolitan">Southern Metropolitan</option>
+                <option value="Northern Metropolitan">Northern Metropolitan</option>
+                <option value="Eastern Metropolitan">Eastern Metropolitan</option>
+            </select>
+        </div>
+        <div>
+            <span>Distance:</span>
+            <input placeholder="0.7 - 48.1" type="text" id="distance" name="distance" onkeyup="this.value=this.value.replace(/[^0-9\.]/g,'')">
+            </input>
+        </div>
+        <div>
+            <span>Bedroom:</span>
+            <input type="text" placeholder="0 - 10" id="Bedroom" name="bedroom" onkeyup="this.value=this.value.replace(/[^0-9\.]/g,'')">
+        </div>
+    </div>
+    <div style="flex-direction: row;display: flex;">
+        <div>
+            <span>Bathroom:</span>
+            <input type="text" placeholder="0 - 8" id="Bathroom" name="bathroom" onkeyup="this.value=this.value.replace(/[^0-9\.]/g,'')">
+        </div>
+        <div>
+            <span>Parking Spot:</span>
+            <input type="text" placeholder="0 - 10" id="Car" name="car" onkeyup="this.value=this.value.replace(/[^0-9\.]/g,'')">
+        </div>
+        <div>
+            <span>Land Size:</span>
+            <input type="text" placeholder="0 - 76000" id="Landsize" name="number" onkeyup="this.value=this.value.replace(/[^0-9\.]/g,'')">
+
+        </div>
+    </div>
+
+<!--    <div>-->
+<!--        <div>-->
+        <input type="submit" value="Submit" />
+           <a href="#" style="text-decoration: none; display: block; width: 270px;height: 50px;background-color: #4472C4;color: white;font-size: 1.2rem;margin-top: 30px;margin-left: auto;margin-right: auto;line-height: 50px; " id="startPredicting" onclick=javascrtpt:jump()-->
+<!--               style="text-decoration: none; display: block; width: 270px;height: 50px;background-color: #4472C4;color: white;font-size: 1.2rem;margin-top: 30px;margin-left: auto;margin-right: auto;line-height: 50px; ">-->
+<!--                Start predicting-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--        <input type="submit" value="Submit" />-->
+    </form>
+</div>
+
+
+
+
+<script>
+
+    function jump(){
+
+        window.location.href="ui2.html";
+
+        // let value = 0;
+        // let rooms_num = $("#room").val();
+        // let type_num = $("#type").val();
+        // let method_num = $("#method").val();
+        // let field_num = $("#field").val();
+        // let Regionname_num = $("#regionname").val();
+        // let Bedroom_num = $("#Bedroom").val();
+        // let Bathroom_num = $("#Bathroom").val();
+        // let Car_num = $("#Car").val();
+        // let landsize_num = $("#Landsize").val();
+        //
+        //
+        // var updateinfo = {Landsize:landsize_num, Car:Car_num, Bathroom:Bathroom_num,Bedroom:Bathroom_num, Bedroom:Bedroom_num,
+        //                     Regionname:Regionname_num,Field:field_num,Method:method_num,Type:type_num,Rooms:rooms_num};
+
+
+        //
+        // fetch('http://127.0.0.1:5000/product_predict/',{
+        //     method:'get',
+        //     headers:{
+        //         'accept':'application/json,text/plain, */*',
+        //         'content-type':'application/json',
+        //         //'authorization': 'token ' + au_token
+        //     },
+        //     body: JSON.stringify(updateinfo)
+        // }).then(res=>res.json())
+        //     .then(res=> console.log(res));
+        // let value = getvalue();
+        //
+
+
+        //
+        // fetch('https://github.com/DaKoala/fetch-example/blob/master/people.json')
+        //     .then(res => res.json())
+        //     .then(json => console.log(json))
+
+
+    }
+    function getvalue(){
+
+    }
+
+</script>
+</body>
